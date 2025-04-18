@@ -1,6 +1,6 @@
 import React from 'react'
 import  todo_icon from '../assets/assets/todo_icon.png'
-
+import TodoItems from './TodoItems'
 
 const Todo = () => {
   return (
@@ -23,7 +23,9 @@ const Todo = () => {
 {/* ------------------------task-------------------- */}
 
         <div>
-              
+              <TodoItems/> 
+              <TodoItems/> 
+              <TodoItems/> 
         </div>
         
       </div>   

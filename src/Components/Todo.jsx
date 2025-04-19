@@ -1,10 +1,10 @@
-import { useEffect, useRef , useState } from 'react'
+import {useEffect , useRef , useState } from 'react'
 import  todo_icon from '../assets/assets/todo_icon.png'
 import TodoItems from './TodoItems'
 
 const Todo = () => {
 
-       const[task, setTask] = useState([]);
+       const[task, setTask] = useState(localStorage.getItem("task") ? JSON.parse(localStorage.getItem("task")) : []);
  
        const inputRef =useRef(null)
   
@@ -26,7 +26,6 @@ const Todo = () => {
                [...task, newTask]
           );
         }
-          console.log(task);
           inputRef.current.value = "";
   }
 
@@ -48,7 +47,7 @@ const Todo = () => {
       };
        
       useEffect(() => {
-         console.log(task);
+          localStorage.setItem("task", JSON.stringify(task));
       },[task]);
   return (
     <>

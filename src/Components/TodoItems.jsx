@@ -12,7 +12,7 @@ const TodoItems = ({text, id , Completed , DeletTaskes , complet}) => {
                     Completed(id)
                 }} className='flex flex-1 items-center gap-2 cursor-pointer'>
                    <img src={complet ? tick_icon : not_tick_icon} alt="Tick image"className='w-7'/>
-                    <p className='text-slate-700 ml-4 text-[17px]'>{text}</p>
+                    <p className={`text-slate-700 ml-4 text-[17px] decoration-slate-500 ${complet ? "line-through" : ""}`}>{text}</p>
                 </div> 
                 <button  onClick={() =>{
                    DeletTaskes(id)

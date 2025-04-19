@@ -1,4 +1,4 @@
-import { useRef , useState } from 'react'
+import { useEffect, useRef , useState } from 'react'
 import  todo_icon from '../assets/assets/todo_icon.png'
 import TodoItems from './TodoItems'
 
@@ -35,6 +35,21 @@ const Todo = () => {
           return task.filter((item) => item.id !== id);
         });
       };
+
+      const Completed = (id) => {
+        setTask((task) => {
+          return task.map((item) => {
+            if (item.id === id) {
+              return { ...item, iscompleted: !item.iscompleted };
+            }
+            return item;
+          });
+        });
+      };
+       
+      useEffect(() => {
+         console.log(task);
+      },[task]);
   return (
     <>
         <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-5 min-h-[400px] rounded-xl my-5">
@@ -56,7 +71,7 @@ const Todo = () => {
 
         <div>
           {task.map((item) => (
-            <TodoItems key={item.id} text={item.text} id={item.id} complet={item.iscompleted} DeletTaskes={Delete}/>
+            <TodoItems key={item.id} text={item.text} id={item.id} complet={item.iscompleted} DeletTaskes={Delete} Completed={Completed}/>
           ))}      
         </div>
       </div>   

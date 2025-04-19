@@ -1,23 +1,40 @@
-import { useRef } from 'react'
+import { useRef , useState } from 'react'
 import  todo_icon from '../assets/assets/todo_icon.png'
 import TodoItems from './TodoItems'
 
 const Todo = () => {
+
+       const[task, setTask] = useState([]);
  
        const inputRef =useRef(null)
   
        const add = ()  =>{
         
       let inputValue = inputRef.current.value.trim();
-          if(inputValue === ""){
+          
+        if(inputValue === ""){
             alert("Please enter a task")
           }
           else{
-            alert("Task added successfully")
-          }
+        
+         const newTask = {
+            id: Date.now(),
+            text: inputValue,
+            iscompleted: false
+          };
+          setTask((task) =>
+               [...task, newTask]
+          );
+        }
+          console.log(task);
           inputRef.current.value = "";
-          console.log(inputValue)
   }
+
+      const Delete = (id) =>{
+        setTask((task) => {
+          return task.filter((item) => item.id !== id);
+        });
+      };
   return (
     <>
         <div className="bg-white place-self-center w-11/12 max-w-md flex flex-col p-5 min-h-[400px] rounded-xl my-5">
@@ -38,10 +55,10 @@ const Todo = () => {
 {/* ------------------------task-------------------- */}
 
         <div>
-              <TodoItems text={inputRef}/> 
-           
+          {task.map((item) => (
+            <TodoItems key={item.id} text={item.text} id={item.id} complet={item.iscompleted} DeletTaskes={Delete}/>
+          ))}      
         </div>
-        
       </div>   
     </>
   )
